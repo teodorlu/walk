@@ -43,6 +43,7 @@ var (
 	keyQuitQ     = key.NewBinding(key.WithKeys("q"))
 	keyOpen      = key.NewBinding(key.WithKeys("enter"))
 	keyBack      = key.NewBinding(key.WithKeys("backspace"))
+	keyMinus      = key.NewBinding(key.WithKeys("-"))
 	keyUp        = key.NewBinding(key.WithKeys("up"))
 	keyDown      = key.NewBinding(key.WithKeys("down"))
 	keyLeft      = key.NewBinding(key.WithKeys("left"))
@@ -242,7 +243,7 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				return m, m.openEditor()
 			}
 
-		case key.Matches(msg, keyBack):
+		case key.Matches(msg, keyBack) || key.Matches(msg, keyMinus):
 			m.searchMode = false
 			m.prevName = filepath.Base(m.path)
 			m.path = filepath.Join(m.path, "..")
